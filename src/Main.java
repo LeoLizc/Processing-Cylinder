@@ -4,6 +4,8 @@ public class Main extends PApplet{
 
     int numOfFaces = 50;
     float h=100,r=60;
+    boolean autoRotate=true;
+
     public void settings(){
         size(600,600, P3D);
         smooth(8);
@@ -14,14 +16,24 @@ public class Main extends PApplet{
         camera(0,0,0,0,0,-5,0,1,0);
     }
 
-    float a=0,b=0;
+    @Override
+    public void mouseClicked() {
+        autoRotate = !autoRotate;
+    }
 
+    float a=0,b=0;
     @Override
     public void draw() {
 
         background(240,240,240);
 
         translate(0,0,-200);
+
+        if(!autoRotate) {
+            b = mouseX * 0.01f;
+            a = mouseY * 0.01f;
+        }
+
         rotateY(b);
         rotateX(a);
 
