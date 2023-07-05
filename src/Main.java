@@ -1,5 +1,4 @@
 import processing.core.PApplet;
-import processing.core.PVector;
 
 public class Main extends PApplet{
 
@@ -29,20 +28,35 @@ public class Main extends PApplet{
         a += 0.004f;
         b += 0.008f;
 
-        PVector upCenter = new PVector(0,- h/2f, 0);
-        PVector up, down;
-
         stroke(100,100,100);
-        fill(0,255,0);
+        fill(0,0,255);
 
+        // Top circle
+        beginShape();
+        for (int i = 0; i < numOfFaces; i++) {
+            float angle = map(i,0,numOfFaces,0,TWO_PI);
+            vertex(r*cos(angle),- h/2f,r*sin(angle));
+        }
+        endShape(CLOSE);
+
+        fill(0,255,0);
+        //Cylindrical body
         beginShape(QUAD_STRIP);
         for (int i = 0; i <= numOfFaces; i++) {
             float angle = map(i,0,numOfFaces,0,TWO_PI);
-            up=upCenter.copy().add(r*cos(angle),0, r*sin(angle));
-            down=upCenter.copy().add(r*cos(angle),h, r*sin(angle));
 
-            vertex(up.x,up.y,up.z);
-            vertex(down.x,down.y,down.z);
+            vertex(r*cos(angle),- h/2f,r*sin(angle));
+            vertex(r*cos(angle),h/2f,r*sin(angle));
+        }
+        endShape();
+
+        // Bottom circle
+        fill(0,240,240);
+        beginShape(TRIANGLE_FAN);
+        vertex(0,h/2f,0);
+        for (int i = 0; i <= numOfFaces; i++) {
+            float angle = map(i,0,numOfFaces,0,TWO_PI);
+            vertex(r*cos(angle),h/2f,r*sin(angle));
         }
         endShape();
     }
