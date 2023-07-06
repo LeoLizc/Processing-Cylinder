@@ -17,7 +17,7 @@ public class Main extends PApplet{
     }
 
     @Override
-    public void mouseClicked() {
+    public void mouseClicked() {// Use click to switch between autorotation and use the mouse position
         autoRotate = !autoRotate;
     }
 
